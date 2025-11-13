@@ -1,7 +1,7 @@
 /* april 2012 q19 traversing a maze. 
    
-   traverse2.c
-   Travsere only two possibilities: down and right
+   traverse4.c
+   Travsere only four possibilities: down, right, up, left.
 */
 
 #include <stdio.h>
@@ -24,20 +24,21 @@ void print (int this1[N][N])
 	}
 }
 
-// Your own recursive function for traversing in two directions only
+// Your own recursive function for traversing in four directions
 bool traverse(int maze[N][N], int x, int y){
-	if (maze[x][y]!=0 || x>=N || y>=N) return false;
-	if (x==N-1&&y==N-1) {
+	if (maze[x][y]!=0 || x>=N || y>=N || x<0 || y<0) return false;
+	if (x==N-1 && y==N-1) {
 		pass=true;
 		return true;
 	}
-	//maze[x][y]=2;
-	if (traverse(maze, x+1, y)) return true;
+	maze[x][y]=2;
 	if (traverse(maze, x, y+1)) return true;
+	if (traverse(maze, x+1, y)) return true;
+	if (traverse(maze, x, y-1)) return true;
+	if (traverse(maze, x-1, y)) return true;
 	//maze[x][y]=0;
 	return false;
 }
-
 
 int main()
 {
@@ -63,10 +64,18 @@ int main()
 	                   1, 1, 1, 1, 1, 0,
 					   1, 1, 1, 1, 1, 1,
 	                   1, 1, 1, 1, 1, 0};
+	
+	int maze4 [N][N]= {0, 0, 1, 0, 0, 0,           
+	                   0, 1, 0, 0, 1, 0,
+	                   0, 0, 0, 1, 1, 0,
+	                   1, 1, 1, 0, 0, 1,
+					   1, 1, 1, 0, 1, 1,
+	                   1, 1, 1, 0, 0, 0};
 
-	print (maze2);
-    printf ("\n\nTwo directional Traversal:");
-	traverse(maze2, 0, 0);
+	print (maze4);
+    printf ("\n\nFour directional Traversal:");
+	traverse(maze4, 0, 0);
 	if(pass) printf("\n\nThere is a path to reach the end of the maze.\n  ** Solved !!");
 	else printf("  **Blocked !!");
+	return 0;
 }
