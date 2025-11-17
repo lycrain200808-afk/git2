@@ -1,91 +1,46 @@
 #include <stdio.h>
+
+void printline(int n){
+	printf("---+");
+	for (int i=0 ; i < 3*n-3 ; i++) printf("-");
+	printf("\n");
+}
+
+void printhead(int n){
+	printline(n);
+	printf("   |");
+	for (int i=1 ; i<n ; i++){
+		printf("%3d",i);
+	}
+	printf("\n");
+	printline(n);
+}
+
 int main(){
 	int n;
 	printf("Enter n: ");
 	scanf("%d",&n);
-	printf("Output Multiplication Table\n");
-	for( int i=0; i<3 ; i++)
-	{
-		printf("-");
-	}
-	printf("+");
-	for (int i=0 ; i < 3*n-3 ; i++)
-	{
-		printf("-");
-	}
-	printf("\n   |");
-	for (int i=1 ; i<n ; i++)
-	{
-		printf("%3d",i);
-	}
-	printf("\n");
-	for( int i=0; i<3 ; i++)
-	{
-		printf("-");
-	}
-	printf("+");
-	for (int i=0 ; i < 3*n-3 ; i++)
-	{
-		printf("-");
-	}
+	printf("\nOutput Multiplication Table\n");
+	printhead(n);
 	
-	//print the list
-	
-	printf("\n");
 	for (int i=1 ; i<n ; i++)
 	{   
 		printf("%3d|",i);
 		for (int j=1 ; j<n ; j++)
 		{   
-			int residue = i*j%n; 
-			printf("%3d",residue);
+			printf("%3d", i*j%n);
 		}
 		printf("\n");
 	}
-	
-	for( int i=0; i<3 ; i++)
-	{
-		printf("-");
-	}
-	printf("+");
-	for (int i=0 ; i < 3*n-3 ; i++)
-	{
-		printf("-");
-	}
-	
+
+	printline(n);
 	//level 3 finished
 	
-	printf("\n");
-	printf("Output Multiplication Table\n");
-	for( int i=0; i<3 ; i++)
-	{
-		printf("-");
-	}
-	printf("+");
-	for (int i=0 ; i < 3*n-3 ; i++)
-	{
-		printf("-");
-	}
-	printf("\n   |");
-	for (int i=1 ; i<n ; i++)
-	{
-		printf("%3d",i);
-	}
-	printf("\n");
-	for( int i=0; i<3 ; i++)
-	{
-		printf("-");
-	}
-	printf("+");
-	for (int i=0 ; i < 3*n-3 ; i++)
-	{
-		printf("-");
-	}
-	printf("\n");
+	printf("Output Inverse Table\n");
+	printhead(n);
 	//print a list
 	
-	for (int i=1 ; i<n ; i++)
-	{   
+	for (int i=1 ; i<n ; i++){   
 		printf("%3d|",i);
 		for (int j=1 ; j<n ; j++)
 		{   
@@ -95,29 +50,11 @@ int main(){
 		}
 		printf("\n");
 	}
-	for( int i=0; i<3 ; i++)
-	{
-		printf("-");
-	}
-	printf("+");
-	for (int i=0 ; i < 3*n-3 ; i++)
-	{
-		printf("-");
-	}
+	printline(n);
 	//level 4
 	
-	printf("\n");
 	printf("Output Quadratic Table\n");
-	for( int i=0; i<3 ; i++)
-	{
-		printf("-");
-	}
-	printf("+");
-	for (int i=0 ; i < 3*n-3 ; i++)
-	{
-		printf("-");
-	}
-	printf("\n");
+	printline(n);
 	for (int i=1 ; i<n ; i++)
 	{   
 		int index;
@@ -146,28 +83,9 @@ int main(){
 	
 	//level 5
 	
-	for( int i=0; i<3 ; i++)
-	{
-		printf("-");
-	}
-	printf("+");
-	for (int i=0 ; i < 3*n-3 ; i++)
-	{
-		printf("-");
-	}
-	printf("\n");
+	printline(n);
 	printf("Output Quadratic Table\n");
-	for( int i=0; i<3 ; i++)
-	{
-		printf("-");
-	}
-	printf("+");
-	for (int i=0 ; i < 3*n-3 ; i++)
-	{
-		printf("-");
-	}
-	printf("\n");
-	
+	printline(n);
 	printf("Output Fractal\n");
 	printf("   ");
 	int digit=n/10;
@@ -218,7 +136,5 @@ int main(){
 		}
 		printf("\n");
 	}
-					
-	
 	return 0;
 }
