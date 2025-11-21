@@ -6,7 +6,7 @@ int find_lcm(int a, int b){
 		a=b;
 		b=temp;
 	}
-	CM=a;
+	int CM=a;
 	while(!(CM%b==0)){
 			CM+=a;
 	}
