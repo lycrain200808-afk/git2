@@ -9,11 +9,26 @@
 #define initial_temp 500
 #define lowest_temp 0.000001
 #define seed 61
-#define n 9
+#define n 13
 
-double x[n] = {0,0,0,  1,1,1,  2,2,2 };
-double y[n] = {0,1,2,  0,1,2,  0,1,2 };
-int initial_route[n]={0,1,2,3,4,5,6,7,8};
+double x[n] = {0,1,1,1,  2,3,4,4, 5,6,7,7,4};
+double y[n] = {6,0,3,5,  0,3,4,6,  2,4,1,5,1 };
+int index_before[13]={12,0,1,2,3,4,5,6,7,8,9,10,11};
+int index_after[13]={1,2,3,4,5,6,7,8,9,10,11,12,0};
+int c[n][n]={0,1,1,1,0,1,0,1,0,1,0,1,0,
+			 1,0,1,0,1,1,0,0,0,0,1,0,1,
+			 1,1,0,1,1,1,1,0,0,0,1,0,0,
+			 1,0,1,0,0,1,1,1,0,0,0,1,0,
+			 0,1,1,0,0,1,1,0,1,0,1,1,1,
+			 1,1,1,1,1,0,1,0,1,0,0,0,0,
+			 0,0,1,1,1,1,0,1,1,0,0,1,1,
+			 1,0,0,1,0,0,1,0,0,0,0,1,0,
+			 0,0,0,0,1,1,1,0,0,1,1,0,1,
+			 1,0,0,0,0,0,0,0,1,0,1,1,0,
+			 0,1,1,0,1,0,0,0,1,1,0,1,1,
+			 1,0,0,1,1,0,1,1,0,1,1,0,0,
+			 0,1,0,0,1,0,1,0,1,0,1,0,0};
+int initial_route[n]={0,3,7,6,9,11,10,8,12,5,4,1,2};
 int route[n], new_route[n], best_route[n];
 
 double compute_new_route_distance()
@@ -74,9 +89,17 @@ void randomize_initial_route()
 	   if (num==32767) this2 = n-1;
 	   else this2= (int) ((num/32767.0)*n);
 	
-	   temp = initial_route[this1];
-	   initial_route[this1] = initial_route[this2];
-	   initial_route[this2] = temp;
+		int exchange=0;
+		if (c[initial_route[this1]][initial_route[index_before[this2]]]==1
+			&& c[initial_route[this1]][initial_route[index_after[this2]]]==1
+			&& c[initial_route[this2]][initial_route[index_before[this1]]]==1
+			&& c[initial_route[this2]][initial_route[index_after[this1]]]==1)
+			exchange=1;
+		if (exchange){
+	   	temp = initial_route[this1];
+	   	initial_route[this1] = initial_route[this2];
+	   	initial_route[this2] = temp;
+	   }
 	}
 }
 
@@ -95,13 +118,21 @@ void randomize_new_route()
 	   if (num==32767) this2 = n-1;
 	   else this2= (int) ((num/32767.0)*n);
 	
+	int exchange=0;
+		if (c[route[this1]][route[index_before[this2]]]==1
+			&& c[route[this1]][route[index_after[this2]]]==1
+			&& c[route[this2]][route[index_before[this1]]]==1
+			&& c[route[this2]][route[index_after[this1]]]==1)
+			exchange=1;
+		if (exchange){
 	   temp = new_route[this1];
 	   new_route[this1] = new_route[this2];
 	   new_route[this2] = temp;
+		}
 	}
 }
 
-main()
+int main()
 {
 	int i;
 	double  distance, best_distance, new_distance, threshold;
