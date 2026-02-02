@@ -16,14 +16,12 @@ int main(){
 	printf("\n%d",checksum);
 	
 	//algorithm
-	int exchange,height=n-2;
-	do
-	{	
+	int exchange;
+	int height=n-2;
+	do{
 		exchange=0;
-		for (int i=0;i<=height;i++)
-		{
-			if (x[i+1]<x[i])
-			{
+		for (int i=0;i<=height;i++){
+			if (x[i+1]<x[i]){
 				int temp;
 				temp=x[i+1];
 				x[i+1]=x[i];
@@ -32,15 +30,16 @@ int main(){
 			}
 		}
 		height--;
-	}while (exchange==1);
+	}while (exchange==1 && height>=0);
 	checksum=0;
 	for (int i=0;i<n;i++) checksum+=x[i];
 	printf("\n%d\n",checksum);
 	bool sort=true;
-	for (int i=0;i<=n-2;i++) 
-	{
-		if(x[i]>x[i+1]) sort=false;
-		break;
+	for (int i=0;i<=n-2;i++) {
+		if(x[i]>x[i+1]){
+			sort=false;
+			break;
+		}
 	}
 	if (sort) printf("sorted");
 	else printf("failed.");		

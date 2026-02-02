@@ -1,14 +1,13 @@
 #include <stdio.h>
 
+int recur2_impl(int this1, int sum){
+	if (this1==0) return sum;
+	return recur2_impl(this1/10, sum*10 + this1%10);
+}
+
 int recur2(int this1){
-	static int sum=0;
-	if(this1==0) return 0;
-	else
-	{
-		sum=sum*10+this1%10;
-		recur2(this1/10);
-	}
-	return sum;
+	if (this1<0) return -recur2_impl(-this1, 0);
+	return recur2_impl(this1, 0);
 }
 
 int main(){
